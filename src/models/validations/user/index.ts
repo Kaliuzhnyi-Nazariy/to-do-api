@@ -1,3 +1,3 @@
-import signupValidation from "./signup.validation";
+import updateValidation from "./update.validation";
 
-export default { signupValidation };
+export default updateValidation;
