@@ -1,12 +1,13 @@
 import express from "express";
 import ctrl from "../controllers/auth";
 import validator from "../helpers/validator";
-import signupValidation from "../models/validations/user/signup.validation";
+import validation from "../models/validations/auth";
+import isAuthenticated from "../middlewares/isAuthenticated";
 
 const router = express.Router();
 
-router.post("/signup", validator(signupValidation), ctrl.signUp);
-router.post("/signin", ctrl.signIn);
-router.post("/logout", ctrl.logout);
+router.post("/signup", validator(validation.signupValidation), ctrl.signUp);
+router.post("/signin", validator(validation.signInValidation), ctrl.signIn);
+router.post("/logout", isAuthenticated, ctrl.logout);
 
 export default router;
