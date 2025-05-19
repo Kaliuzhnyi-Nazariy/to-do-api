@@ -10,4 +10,6 @@ export interface ISignupUserData extends IUser, Document {
   [x: string]: any;
 }
 
+export type UserSignIn = Omit<IUser, "allTasks" | "name">;
+
 export type IUserReturn = Omit<ISignupUserData, "password">;
