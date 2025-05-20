@@ -6,6 +6,7 @@ import bcryptjs from "bcryptjs";
 
 import errorHandler from "../../helpers/errorHandler";
 import { IUpdateUser } from "./interface";
+import ToDoSchema from "../../models/todo.model";
 
 const getInfo = async (req: Request, res: Response) => {
   const { email, name, allTasks } = (req as extendedUser).user;
@@ -51,7 +52,9 @@ const updateUser = async (req: Request, res: Response) => {
 const deleteAccount = async (req: Request, res: Response) => {
   const { _id } = (req as extendedUser).user;
 
-  await User.findByIdAndUpdate(_id);
+  await ToDoSchema.deleteMany({ owner: _id });
+
+  await User.findByIdAndDelete(_id);
 
   return res
     .clearCookie("token", {
