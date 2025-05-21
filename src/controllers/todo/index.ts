@@ -5,6 +5,7 @@ import errorHandler from "../../helpers/errorHandler";
 import { IToDo } from "../../models/types/todo.schema";
 import ctrlWrapper from "../../helpers/ctrlWrapper";
 import { IToDoReturn } from "./interfaces";
+import User from "../../models/user.model";
 
 const getToDo = async (req: Request, res: Response<IToDo[]>) => {
   const { _id } = (req as extendedUser).user;
@@ -27,6 +28,8 @@ const addToDo = async (req: Request, res: Response<IToDoReturn>) => {
   });
 
   if (!newToDo) throw errorHandler(500);
+
+  await User.findByIdAndUpdate(_id, { $inc: { allTasks: 1 } });
 
   return res.status(201).json(newToDo);
 };
