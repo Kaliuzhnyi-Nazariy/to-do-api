@@ -118,8 +118,9 @@ const logout = async (req: Request<{}, {}, IUser>, res: Response<IUser>) => {
   res
     .clearCookie("token", {
       maxAge: 3 * 24 * 60 * 60 * 1000,
-      // sameSite: "none",
-      sameSite: "lax",
+      sameSite: "none",
+      httpOnly: true,
+      // sameSite: "lax",
       secure: true,
       path: "/",
     })

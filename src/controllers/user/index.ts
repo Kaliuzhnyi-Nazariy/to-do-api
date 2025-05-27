@@ -59,8 +59,9 @@ const deleteAccount = async (req: Request, res: Response) => {
   return res
     .clearCookie("token", {
       maxAge: 3 * 24 * 60 * 60 * 1000,
-      // sameSite: "none",
-      sameSite: "lax",
+      sameSite: "none",
+      // sameSite: "lax"
+      httpOnly: true,
       secure: true,
       path: "/",
     })
