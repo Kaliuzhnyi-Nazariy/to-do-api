@@ -47,8 +47,9 @@ const signUp = async (
     return res
       .cookie("token", token, {
         maxAge: 3 * 24 * 60 * 60 * 1000,
-        // sameSite: "none",
-        sameSite: "lax",
+        sameSite: "none",
+        httpOnly: true,
+        // sameSite: "lax",
         secure: true,
         path: "/",
       })
@@ -91,8 +92,9 @@ const signIn = async (
   return res
     .cookie("token", token, {
       maxAge: 3 * 24 * 60 * 60 * 1000,
-      // sameSite: "none",
-      sameSite: "lax",
+      sameSite: "none",
+      httpOnly: true,
+      // sameSite: "lax",
       secure: true,
       path: "/",
     })
