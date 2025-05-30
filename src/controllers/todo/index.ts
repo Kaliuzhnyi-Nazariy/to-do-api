@@ -70,6 +70,12 @@ const updateStatus = async (req: Request, res: Response<IToDoReturn>) => {
 
   if (!newToDo) return errorHandler(500);
 
+  if (newToDo.status === "done") {
+    setTimeout(async () => {
+      await ToDoSchema.findByIdAndDelete(todoId);
+    }, 86400000);
+  }
+
   return res.status(200).json(newToDo);
 };
 
